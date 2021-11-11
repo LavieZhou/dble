@@ -62,7 +62,7 @@ public class DruidSingleUnitSelectParser extends DefaultDruidParser {
                 this.getCtx().clearRouteCalculateUnit();
             }
             // change canRunInReadDB
-            if ((mysqlSelectQuery.isForUpdate() || mysqlSelectQuery.isLockInShareMode())) {
+            if ((mysqlSelectQuery.isForUpdate() || mysqlSelectQuery.isLockInShareMode()) && !sc.isAutocommit()) {
                 rrs.setCanRunInReadDB(false);
             }
         } else if (sqlSelectQuery instanceof SQLUnionQuery) {

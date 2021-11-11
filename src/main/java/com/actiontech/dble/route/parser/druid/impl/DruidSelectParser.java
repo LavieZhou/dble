@@ -136,7 +136,7 @@ public class DruidSelectParser extends DefaultDruidParser {
         SchemaConfig schema = schemaInfo.getSchemaConfig();
 
         String noShardingNode = RouterUtil.isNoSharding(schema, schemaInfo.getTable());
-        if ((mysqlSelectQuery.isForUpdate() || mysqlSelectQuery.isLockInShareMode())) {
+        if ((mysqlSelectQuery.isForUpdate() || mysqlSelectQuery.isLockInShareMode()) && !sc.isAutocommit()) {
             rrs.setCanRunInReadDB(false);
         }
         if (noShardingNode != null) {
